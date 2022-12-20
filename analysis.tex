@@ -1,0 +1,117 @@
+\documentclass[10pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\newcounter{countCode}
+\lstnewenvironment{code} [1][caption=Ponme caption, label=default]{%
+	\renewcommand*{\lstlistingname}{Listado} 
+	\setcounter{lstlisting}{\value{countCode}} 
+	\lstset{ %
+	language=java,
+	basicstyle=\ttfamily\footnotesize,       % the size of the fonts that are used for the code
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\sc,      % the size of the fonts that are used for the line-numbers
+	stepnumber=1,                   % the step between two line-numbers. 
+	numbersep=5pt,                 % how far the line-numbers are from the code
+	numberstyle=\color{red!50!blue},
+    	backgroundcolor=\color{lightgray!20},
+	rulecolor=\color{blue},
+	keywordstyle=\color{red}\bfseries,
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	framexleftmargin=0mm,
+	numberblanklines=false,
+	xleftmargin=5pt,
+	breaklines=true,
+	breakatwhitespace=true,
+	breakautoindent=true,
+	captionpos=t,
+	texcl=true,
+	tabsize=2,                      % sets default tabsize to 3 spaces
+	extendedchars=true,
+	inputencoding=utf8, 
+	escapechar=\%,
+	morekeywords={print, println, size, background, strokeWeight, fill, line, rect, ellipse, triangle, arc, save, PI, HALF_PI, QUARTER_PI, TAU, TWO_PI, width, height,},
+	emph=[1]{print,println,}, emphstyle=[1]{\color{blue}}, % Mis palabras clave.
+	emph=[2]{width,height,}, emphstyle=[2]{\bf\color{violet}}, % Mis palabras clave.
+	emph=[3]{PI, HALF_PI, QUARTER_PI, TAU, TWO_PI}, emphstyle=[3]\color{orange!50!violet}, % Mis palabras clave.
+	emph=[4]{line, rect, ellipse, triangle, arc,}, emphstyle=[4]\color{green!70!black}, % Mis palabras clave.
+	%emph=[5]{size, background, strokeWeight, fill,}, emphstyle=[5]{\tt \color{red!30!blue}}, % Mis palabras clave.
+	%emph={[2]sqrt,baset}, emphstyle={[2]\color{blue}}, % f(sqrt(2)), sqrt a nivel 2 se pondrá azul
+	#1}}{\addtocounter{countCode}{1}}
+
+
+
+\title{Real Analysis Lecture Notes}
+\author{Job Hernandez Lara}
+\date{\today}
+\begin{document}
+\maketitle \tableofcontents 
+
+
+\begin{abstract}
+This document represent lecture notes for a one quarter course on introductory real analysis course. Topics include real numbers, sequences and series,, and functional limits and continuity. These notes are based on the textbooks "Advanced Calculus" by Fitzpatrick and "Understanding Analysis" by Abbott. 
+\end{abstract}
+
+\section{Review}
+
+\subsection{Constructing Direct Proofs}
+A conditional statement is statement written as $P\implies Q$ where $P$ is the hypothesis and $ Q $ is the conclusion. Intuitively, $P \implies Q$ means that $Q$ is true whenever $P$ is true; in other words, if $P$ is true then it follows necessarily that $Q$ is true. Here is the truth table for conditional statements:
+
+\begin{center}
+    \[
+\begin{array}{r|c|l} 
+P & Q & P \implies Q\\
+\hline
+T & T & T\\
+T & F & F\\
+F & T & T\\
+F & F & T\\
+\end{array}
+\]
+\end{center}
+A direct proof is a type of proof in which the mathematician demonstrates that one mathematical statement follows logically from definitions and previously proven statements. To prove that a conditional statement $P \implies Q$ is true we only need to prove the $Q$ is true whenever $P$ is true. Why? Because $P\implies Q$ is true whenever $P$ is false. If you take a look at the truth table for conditional statements you will notice that $P \implies Q$ is false when $P$ is true and $Q$ is false. So, by demonstrating that $Q$ is true whenever $P$ is true we can prove the statement because you are guaranteed that the statement is true. There is a technique for proving by this method called the \textbf{know-show-table.} In this technique we work forward from the hypothesis and backwards from the conclusion and we try to connect the two by building a chain of reasoning. You start with the conclusion and ask "under what conditions is the conclusion true?" and then work backwards. Suppose  we are given the statement: \textit{If $x$ and $y$ are odd integers, then $x \cdot y$ is an odd integer.} Here is the table for this statement:
+
+\begin{center}
+    \[
+\begin{array}{|r|c|l|} \hline
+Step & Know & Reason\\
+\hline
+P & x\hspace{.1cm} \text{and} y \text{are odd integers} & \text{Hypothesis}\\
+P1 & \text{There exists integers $m$ and $n$ such that $x = 2m + 1$ and $y = 2n + 1$}  & \text{Definition of an odd integer.} \\
+P2 & xy = (2m + 1)(2n + 1) & \text{Substitution}\\
+P3 & xy = 4mn + 2m + 2n + 1 & \text{Algebra} \\
+P4 & xy = 2(2mn + m + n) + 1 & \text{Algebra}\\
+P5 & \text{$2mn + m + n$ is an integer} & \text{Closure properties of the integers}\\
+Q1 & \text{There exists an integer $q$ such that $xy = 2q + 1.$}  & \text{Use $q = (2mn + m + n)$}\\
+Q & \text{$ x \cdot y$ is an odd integer.} & \text{Definition of an odd integer}\\
+Step & Show & Reason
+\end{array}
+\]
+\end{center}
+
+In the above \textbf{know-show-table} we ask, by working backwards (i.e from the conclusion), we ask "How do we prove that an integer is odd?" and then we continue asking the same question until we can connect it with the hypothesis.
+
+
+
+\section{Real Numbers}
+
+\subsection{Inductive Sets}
+A proper and rigorous understanding of analysis is grounded on an understanding of the set of real numbers and its subsets -- e.g., natural numbers. Consider the natural numbers. If we want to talk precisely about the natural numbers we first need introduce the idea of an inductive set. A set $S$ is inductive if $1 \in S$ and $x \in S \implies x+1 \in S$. So, the set $\mathbb{N}$ is inductive. To see why consider that $1 \in \mathbb{N}$. By the inductive definition if $x \in \mathbb{N} \implies x+1 \in \mathbb{N}$.
+
+\subsection{Principle of Induction}
+
+\section{Sequences and Series}
+
+\subsection{Limit of a Sequence}
+Firstly, we need to understand what a \textit{sequence} is. A sequence is function whose domain is $\mathbb{N}$. In other words, given a function $f: \mathbb{N} \to \mathbb{R}$ then $f(n)$ is the \textit{n}th term of the sequence.
+Now, that we have defined what a \textit{sequence} is  we are ready to think about \textit{convergence} of a sequence. A sequence $a_{n}$ converges to \textit{a} whenever the following proposition is true: if $n \ge N$ then $\left|a_{n}-a\right|$ $< \epsilon$ where $\epsilon$ is a positive number and there exists $N \in \mathbf{N}$. We denote $\left(a_{n}\right)$ converges to $a$ as $\lim_{a_{n}} = a$. Intuitively, this means that there is an interval $\left(a-\epsilon, a+\epsilon\right)$ centered on $a$ where $N$ is the first entry into this interval.
+
+\end{document}
