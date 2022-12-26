@@ -8,6 +8,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{xcolor}
 \newcounter{countCode}
+\newtheorem{theorem}{Theorem}
 \lstnewenvironment{code} [1][caption=Ponme caption, label=default]{%
 	\renewcommand*{\lstlistingname}{Listado} 
 	\setcounter{lstlisting}{\value{countCode}} 
@@ -114,4 +115,15 @@ A proper and rigorous understanding of analysis is grounded on an understanding 
 Firstly, we need to understand what a \textit{sequence} is. A sequence is function whose domain is $\mathbb{N}$. In other words, given a function $f: \mathbb{N} \to \mathbb{R}$ then $f(n)$ is the \textit{n}th term of the sequence.
 Now, that we have defined what a \textit{sequence} is  we are ready to think about \textit{convergence} of a sequence. A sequence $a_{n}$ converges to \textit{a} whenever the following proposition is true: if $n \ge N$ then $\left|a_{n}-a\right|$ $< \epsilon$ where $\epsilon$ is a positive number and there exists $N \in \mathbf{N}$. We denote $\left(a_{n}\right)$ converges to $a$ as $\lim_{a_{n}} = a$. Intuitively, this means that there is an interval $\left(a-\epsilon, a+\epsilon\right)$ centered on $a$ where $N$ is the first entry into this interval.
 
+\subsection{The Algebraic and Order Limit Theorems}
+A sequence is bounded if every term of $x_{n}$ is contained in an interval $\left[-M, M\right]$ or more formally: Assuming there exists a number $M > 0$ such that $\left|x_{n}\right| \le M$ for all $n \in \mathbf{N}$ then the sequence $x_{n}$ is bounded. The theorem that follows from this definition is the following: 
+\begin{theorem}
+\textit{Every convergent sequence is bounded.}
+\end{theorem}
+\textit{Proof.} Suppose $\left(x_{n}\right)$ converges to a limit \textit{l}. And furthermore suppose $\epsilon = 1$ and by the definition of convergence then we know that $x_{n}$ is in the interval 
+$\left(l-\epsilon, l+\epsilon\right)$ so there exists an $N \in \mathbf{N}$ such that $n \ge N$. So, we can conclude that $\left|x_{n}\right| < \left|l\right| + 1$ for all $n \ge N$.
+
+\section{Continuity}
+\subsection{Continuous Functions}
+In short  a function $f$ is continuous at $c \in A$ if $\lim_{x\to c} f\left(x\right) = f\left(c\right)$
 \end{document}
