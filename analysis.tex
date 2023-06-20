@@ -4,11 +4,13 @@
 \usepackage[OT1]{fontenc}
 \usepackage{amsfonts, amsmath, amsthm, amssymb}
 \usepackage{graphicx}
+\usepackage{enumitem}
 \usepackage{listings}
 \usepackage[margin=1in]{geometry}
 \usepackage{xcolor}
 \newcounter{countCode}
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
 \lstnewenvironment{code} [1][caption=Ponme caption, label=default]{%
 	\renewcommand*{\lstlistingname}{Listado} 
 	\setcounter{lstlisting}{\value{countCode}} 
@@ -58,7 +60,7 @@
 
 
 \begin{abstract}
-This document represent lecture notes for a one quarter course on introductory real analysis course. Topics include real numbers, sequences and series,, and functional limits and continuity. These notes are based on the textbooks "Advanced Calculus" by Fitzpatrick and "Understanding Analysis" by Abbott. 
+In his classic textbook: "Principles of Mathematical Analysis", Dr. Rudin claimed that the main concepts of analysis include continuity, convergence, differentiation and integration. These notes correspond to these main concepts based on Dr. Abbott's analysis textbook "Understanding Analysis".
 \end{abstract}
 
 \section{Review}
@@ -102,18 +104,52 @@ In the above \textbf{know-show-table} we ask, by working backwards (i.e from the
 
 
 
+
 \section{Real Numbers}
 
-\subsection{Inductive Sets}
-A proper and rigorous understanding of analysis is grounded on an understanding of the set of real numbers and its subsets -- e.g., natural numbers. Consider the natural numbers. If we want to talk precisely about the natural numbers we first need introduce the idea of an inductive set. A set $S$ is inductive if $1 \in S$ and $x \in S \implies x+1 \in S$. So, the set $\mathbb{N}$ is inductive. To see why consider that $1 \in \mathbb{N}$. By the inductive definition if $x \in \mathbb{N} \implies x+1 \in \mathbb{N}$.
+ Dr. Hardy claimed in his book "A Mathematical Apology" that the theorem that states that $\sqrt{2}$ is irrational is a beautiful theorem.
 
-\subsection{Principle of Induction}
+\begin{theorem}
+There is no rational number whose square is 2.
+\end{theorem}
+\textit{Proof.} Suppose there is a rational number $n$ whose square is 2. Then $n$ can be represented as $p/q$. Consequently, this means that $(p/q)^2 = 2$. We assume that $p$ and $q$ have no common factors; consequently, $p^2 = 2q^2$. This means that  $p^2$ is even so $p$ is even. Given this we can rewrite $p$ as $2r$. If we then substitute $p$ for $2r$ we end up with: $2r^2 = q^2$ which means that $q$ is even which in turn means that this can be reduced further which is a contradiction because there were suppose to be no common factors.
 
+To understand the main concepts of analysis, namely, continuity, convergence, differentiation and integration we must think hard about the real numbers. As a result, we start with the natural numbers which are denoted as $\mathbb{N} = \{ 1,2,3,4, \dots \}$. Leopold Kronecker said “The natural numbers are the work of God. The rest is the work of mankind.” Given the natural numbers we can perform addition but we must extend our system to the integers, denoted as $\mathbb{Z} = \{\dots,-3,-2,-1,0,1,2,3, \dots \}$, if we want to include the number zero (additive identity) and the additive inverses needed to define subtraction. Now, how do we extend our system to be able to define multiplication and division? The number one acts as a multiplicative identity but to be able define division we must extend our system to the rational numbers denoted as  $\mathbb{Q}$ = \{all fractions p/q where p and q are integers where q is not 0\}. The set of rational numbers is a field because we can perform addition, subtraction, multiplication, and division. The set of natural numbers and the set of integers are not fields. Imagine the number line of the rational numbers. Then we will notice that there are holes in this number line when we consider numbers such as the square root of 2 or square root of 3, and so on. As a result of this observation, mathematicians extended the set of the rational numbers to the real numbers. Given the real numbers wherever there is a hole in the number line we place an irrational number.
+
+A set $A \in \mathbb{R}$ is bounded from above if there exists a  $b \in \mathbb{R}$ such that $a \le b$ for all $a$ in $A$. Similarly, a set $A$ is bounded from below if there exists an $l$ such that $l \le a$ for all $a \in A$. A real number $s$ is the \textbf{least upper bound} for a set $A \in R$ if it meets two conditions: 1) s is an upper bound for A; 2) let b be any upper bound for A then $s \le b$. There isn’t a least upper bound in the rational numbers because you can always reduce a given rational number; but there is a least upper bound in a subset of the real numbers. The least upper bound is denoted as $s = sup A$.
+
+\begin{lemma}
+    Assume s in R is an upper bound for a set $A \in R$. Then $s = sup A$ if and only if for  every choice $\epsilon > 0$ there exists an element $a \in A$ such that $s - \epsilon < a$. Here is a quote from the textbook:
+    \begin{quote}
+    Given that s is an upper bound s is the least upper bound if and only if any number smaller than s is not  an upper bound.
+    \end{quote}
+\end{lemma}
+
+We will now talk about how $\mathbb{Q}$ is dense in $\mathbb{R}$.
+\begin{theorem}
+Archimedean Property: 
+\begin{enumerate}[label=(\roman*)]
+\item \textit{Given any number $x \in \mathbb{R}$, there exists an $n \in \mathbb{N}$ such that $n > x$}.
+\item \textit{Given any real number $y>0$ there exists an $n \in \mathbb{N}$ satisfying $1/n < y$}.
+\end{enumerate}
+
+\end{theorem}
+\textit{Proof.} Part (i) states that $\mathbb{N}$ is not bounded. Assume that $\mathbb{N}$ is bounded. Then by the Axiom of Completeness $\mathbb{N}$ should have a least upper bound so we can set $\alpha = sup \mathbb{N}$. Now if we consider $\alpha - 1$ then we no longer have an upper bound given lemma 2. Therefore there exists an $n \in \mathbb{N}$ satisfying $\alpha - 1 < n$ but this is to say $\alpha < n + 1$ and as a result $n+1 \in \mathbb{N}$ which contradicts the fact that $\alpha$ is supposed to be an upper bound for $\mathbb{N}$. Part (ii) follows from (i) by letting $x=1/y$.
 \section{Sequences and Series}
 
 \subsection{Limit of a Sequence}
 Firstly, we need to understand what a \textit{sequence} is. A sequence is function whose domain is $\mathbb{N}$. In other words, given a function $f: \mathbb{N} \to \mathbb{R}$ then $f(n)$ is the \textit{n}th term of the sequence.
 Now, that we have defined what a \textit{sequence} is  we are ready to think about \textit{convergence} of a sequence. A sequence $a_{n}$ converges to \textit{a} whenever the following proposition is true: if $n \ge N$ then $\left|a_{n}-a\right|$ $< \epsilon$ where $\epsilon$ is a positive number and there exists $N \in \mathbf{N}$. We denote $\left(a_{n}\right)$ converges to $a$ as $\lim_{a_{n}} = a$. Intuitively, this means that there is an interval $\left(a-\epsilon, a+\epsilon\right)$ centered on $a$ where $N$ is the first entry into this interval.
+\subsubsection{Exercises}
+\textbf{Exercise 2.2.5}. Let [[x]] be the greatest integer less than or equal to $x$; for each sequence find $\lim_{a_{n}}$ and verify it with the definition of convergence.
+
+\textbf{Solution (2.2.5 a)}
+$\lim_{5n}$ = 0. So, let $\epsilon > 0$ be an arbitrary positive number. Choose a natural number $N$ satisfying whatever $\epsilon$ happens to be. We want $5n/5 < \epsilon/5$ which yields $n < \epsilon / 5$. Choose a natural number $N$ satisfying  $N < \epsilon/5$. Let $n \ge N$ then  $n < \epsilon/5$ implies $5n < \epsilon$ and hence $\left|a_{n} - 0\right| < \epsilon$. Note that by claiming that $\lim_{5n} = 0$ we mean that the sequence $a_{n} = 5n$ converges to 0.
+
+\textbf{Solution (2.2.5.b)}
+$a_{n}$ = [[$(12+4n) / 3n$]].
+$\lim_{12+4n/3n}$ = 1. So we must show that there exists an $N \in \mathbb{N}$ such that $n \ge N$ implies $\left|12+4n/3n-0\right| < \epsilon$. \textit{Proof.} Pick $N = 6$. If $n \ge N$ we then have $\left|12+4n/3n- 1\right| < \epsilon$ because $12+4n/3n = 1$ for all $n>5$.
+
 
 \subsection{The Algebraic and Order Limit Theorems}
 A sequence is bounded if every term of $x_{n}$ is contained in an interval $\left[-M, M\right]$ or more formally: Assuming there exists a number $M > 0$ such that $\left|x_{n}\right| \le M$ for all $n \in \mathbf{N}$ then the sequence $x_{n}$ is bounded. The theorem that follows from this definition is the following: 
