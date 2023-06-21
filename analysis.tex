@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt]{amsbook}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[OT1]{fontenc}
@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{listings}
+\usepackage{hyperref}
 \usepackage[margin=1in]{geometry}
 \usepackage{xcolor}
 \newcounter{countCode}
@@ -56,16 +57,27 @@
 \author{Job Hernandez Lara}
 \date{\today}
 \begin{document}
-\maketitle \tableofcontents 
+\frontmatter 
 
+\date{\today}
 
 \begin{abstract}
 In his classic textbook: "Principles of Mathematical Analysis", Dr. Rudin claimed that the main concepts of analysis include continuity, convergence, differentiation and integration. These notes correspond to these main concepts based on Dr. Abbott's analysis textbook "Understanding Analysis".
 \end{abstract}
 
-\section{Review}
+\maketitle 
 
-\subsection{Constructing Direct Proofs}
+\newpage 
+
+\tableofcontents 
+
+\mainmatter
+
+
+
+\chapter{Review}
+
+\section{Constructing Direct Proofs}
 A conditional statement is statement written as $P\implies Q$ where $P$ is the hypothesis and $ Q $ is the conclusion. Intuitively, $P \implies Q$ means that $Q$ is true whenever $P$ is true; in other words, if $P$ is true then it follows necessarily that $Q$ is true. Here is the truth table for conditional statements:
 
 \begin{center}
@@ -105,7 +117,7 @@ In the above \textbf{know-show-table} we ask, by working backwards (i.e from the
 
 
 
-\section{Real Numbers}
+\chapter{Real Numbers}
 
  Dr. Hardy claimed in his book "A Mathematical Apology" that the theorem that states that $\sqrt{2}$ is irrational is a beautiful theorem.
 
@@ -135,12 +147,12 @@ Archimedean Property:
 
 \end{theorem}
 \textit{Proof.} Part (i) states that $\mathbb{N}$ is not bounded. Assume that $\mathbb{N}$ is bounded. Then by the Axiom of Completeness $\mathbb{N}$ should have a least upper bound so we can set $\alpha = sup \mathbb{N}$. Now if we consider $\alpha - 1$ then we no longer have an upper bound given lemma 2. Therefore there exists an $n \in \mathbb{N}$ satisfying $\alpha - 1 < n$ but this is to say $\alpha < n + 1$ and as a result $n+1 \in \mathbb{N}$ which contradicts the fact that $\alpha$ is supposed to be an upper bound for $\mathbb{N}$. Part (ii) follows from (i) by letting $x=1/y$.
-\section{Sequences and Series}
+\chapter{Sequences and Series}
 
-\subsection{Limit of a Sequence}
+\section{Limit of a Sequence}
 Firstly, we need to understand what a \textit{sequence} is. A sequence is function whose domain is $\mathbb{N}$. In other words, given a function $f: \mathbb{N} \to \mathbb{R}$ then $f(n)$ is the \textit{n}th term of the sequence.
 Now, that we have defined what a \textit{sequence} is  we are ready to think about \textit{convergence} of a sequence. A sequence $a_{n}$ converges to \textit{a} whenever the following proposition is true: if $n \ge N$ then $\left|a_{n}-a\right|$ $< \epsilon$ where $\epsilon$ is a positive number and there exists $N \in \mathbf{N}$. We denote $\left(a_{n}\right)$ converges to $a$ as $\lim_{a_{n}} = a$. Intuitively, this means that there is an interval $\left(a-\epsilon, a+\epsilon\right)$ centered on $a$ where $N$ is the first entry into this interval.
-\subsubsection{Exercises}
+\subsection{Exercises}
 \textbf{Exercise 2.2.5}. Let [[x]] be the greatest integer less than or equal to $x$; for each sequence find $\lim_{a_{n}}$ and verify it with the definition of convergence.
 
 \textbf{Solution (2.2.5 a)}
@@ -151,7 +163,7 @@ $a_{n}$ = [[$(12+4n) / 3n$]].
 $\lim_{12+4n/3n}$ = 1. So we must show that there exists an $N \in \mathbb{N}$ such that $n \ge N$ implies $\left|12+4n/3n-0\right| < \epsilon$. \textit{Proof.} Pick $N = 6$. If $n \ge N$ we then have $\left|12+4n/3n- 1\right| < \epsilon$ because $12+4n/3n = 1$ for all $n>5$.
 
 
-\subsection{The Algebraic and Order Limit Theorems}
+\section{The Algebraic and Order Limit Theorems}
 A sequence is bounded if every term of $x_{n}$ is contained in an interval $\left[-M, M\right]$ or more formally: Assuming there exists a number $M > 0$ such that $\left|x_{n}\right| \le M$ for all $n \in \mathbf{N}$ then the sequence $x_{n}$ is bounded. The theorem that follows from this definition is the following: 
 \begin{theorem}
 \textit{Every convergent sequence is bounded.}
@@ -159,7 +171,23 @@ A sequence is bounded if every term of $x_{n}$ is contained in an interval $\lef
 \textit{Proof.} Suppose $\left(x_{n}\right)$ converges to a limit \textit{l}. And furthermore suppose $\epsilon = 1$ and by the definition of convergence then we know that $x_{n}$ is in the interval 
 $\left(l-\epsilon, l+\epsilon\right)$ so there exists an $N \in \mathbf{N}$ such that $n \ge N$. So, we can conclude that $\left|x_{n}\right| < \left|l\right| + 1$ for all $n \ge N$.
 
-\section{Continuity}
-\subsection{Continuous Functions}
+How do sequences behave with respect to the operations of addition, multiplication, division and order?
+
+\begin{theorem}
+    (Algebraic Limit Theorem).
+    Let $\lim_{a_{n}} = a$ and $\lim_{b_{n}} = b$. Then,
+    \begin{enumerate}[label=(\roman*)]
+    \item $\lim_{ca_{n}} = ca$, for all $c \in \mathbb{R}$;
+    \item $\lim_{a_{n} + b_{n}} = a + b$;
+    \item $\lim_{a_{n} * b_{n}} = ab$;
+    \item $\lim_{a_{n}/b_{n}} = a/b, provided b is not 0$.
+    \end{enumerate}
+\end{theorem}
+\subsection{Exercises}
+\textbf{Exercise 2.3.1 (a)}. 
+Let $x_{n} \ge 0$ for all $n \in \mathbb{N}$. (a) If $x_{n} \to 0$
+show that $\left|\sqrt{x_{n}} - 0\right|$. Whatever $\epsilon$ happens to be we want $\sqrt{x_{n}} < \epsilon$ which is equivalent to $x_{n} < \epsilon^2$. We claim that $\lim_{\sqrt{x_{n}}} = 0$. \textit{Proof.} Let $\epsilon > 0$ be an arbitrary positive number. Choose a natural number  $N$ satisfying  $N < \epsilon^2$. Let $n \ge N$ then $n < \epsilon^2$ implies $\sqrt{x_{n}} < \epsilon$ and hence $\left|a_{n} - 0\right| < \epsilon$.
+\chapter{Continuity}
+\section{Continuous Functions}
 In short  a function $f$ is continuous at $c \in A$ if $\lim_{x\to c} f\left(x\right) = f\left(c\right)$
 \end{document}
