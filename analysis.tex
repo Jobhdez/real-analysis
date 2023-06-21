@@ -189,5 +189,39 @@ Let $x_{n} \ge 0$ for all $n \in \mathbb{N}$. (a) If $x_{n} \to 0$
 show that $\left|\sqrt{x_{n}} - 0\right|$. Whatever $\epsilon$ happens to be we want $\sqrt{x_{n}} < \epsilon$ which is equivalent to $x_{n} < \epsilon^2$. We claim that $\lim_{\sqrt{x_{n}}} = 0$. \textit{Proof.} Let $\epsilon > 0$ be an arbitrary positive number. Choose a natural number  $N$ satisfying  $N < \epsilon^2$. Let $n \ge N$ then $n < \epsilon^2$ implies $\sqrt{x_{n}} < \epsilon$ and hence $\left|a_{n} - 0\right| < \epsilon$.
 \chapter{Continuity}
 \section{Continuous Functions}
-In short  a function $f$ is continuous at $c \in A$ if $\lim_{x\to c} f\left(x\right) = f\left(c\right)$
+In short  a function $f$ is continuous at $c \in A$ if $\lim_{x\to c} f\left(x\right) = f\left(c\right)$. This means that $f\left(x\right)$ converges to $f\left(c\right)$ by definition.
+
+\begin{theorem}
+    (Characterization of continuity)
+    Let $f \colon A \to \mathbb{R}$ and let $c \in A$. The function $f$ is continuous at $c$ if and only if anyone of the following three conditions is met:
+
+    \begin{enumerate}[label=(\roman*)]
+    \item for all $\epsilon > 0$ there exists a $\delta > 0$ such that $\left|x-c\right| < \delta$ and $x \in A$ implies $\left|f\left(x\right) - f\left(c\right)\right| < \epsilon$.
+    \item for all $V_{\epsilon}\left(f\left(c\right)\right)$ there exists a $V_{\delta}\left(c\right)$ with the property that $x \in V_{\delta}\left(c\right) and x \in A$ implies $f\left(x\right) \in V_{\epsilon}\left(f\left(c\right)\right)$
+    \item if $x_{n} \to c$ with $x_{n} \in A$ then $f\left(x_{n}\right) \to f\left(c\right).$
+    \end{enumerate}
+    If $c$ is limit point of $A$ then the above conditions are equivalent to  $\lim_{x\to c} f\left(x\right) = f\left(c\right)$.
+    
+\end{theorem}
+
+\begin{theorem}
+    (Algebraic continuity theorem)
+    Assume $f \colon A \to \mathbb{R}$ and $g \colon A \to \mathbb{R}$ are continuous at point $c \in A$. Then,
+
+    \begin{enumerate}[label=(\roman*)]
+    \item $kf\left(x\right)$ is continuous at $c$ for all $k \in \mathbb{R}$;
+    \item $f\left(x\right) + g\left(x\right)$ is continuous at point $c$;
+    \item $f\left(x\right)g\left(x\right)$ is continuous at point $c$;
+    \item $f\left(x\right) / g\left(x\right)$ is continuous at point $c$, provided the quotient is defined.
+    \end{enumerate}
+
+    
+\end{theorem}
+
+\subsection{Exercises}
+
+
+\textbf{Exercise 4.3.1 a}. Let $g\left(x\right) = \sqrt[3]{x}$. Prove that $g$ is continuous at $c=0$.
+
+\textbf{Solution 4.3.1.a}. Let $\epsilon > 0$. We need to argue that $\left|g\left(x\right) - g\left(c\right)\right| < \epsilon$ for all values of $x$ in some $\delta$ neighborhood around $c$. If $c = 0$ this reduces to the statement $\sqrt[3]{x} < \epsilon$ which happens as long as $x < \epsilon^3$; thus if we choose $\delta = \epsilon^3$ we see that $\left|x-0\right| < \delta$ implies $\left|f\left(x\right) - 0\right| < \epsilon$.
 \end{document}
